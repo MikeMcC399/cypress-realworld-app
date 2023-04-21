@@ -4,10 +4,11 @@ on:
   push:
     branches-ignore:
       - "renovate/**"
+  workflow_dispatch:
 
 jobs:
   install:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
       options: --user 1001
@@ -37,20 +38,20 @@ jobs:
 
   ui-chrome-tests:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
       options: --user 1001
     needs: install
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+    # strategy:
+    #   # when one test fails, DO NOT cancel the other
+    #   # containers, because this will kill Cypress processes
+    #   # leaving Cypress Cloud hanging ...
+    #   # https://github.com/cypress-io/github-action/issues/48
+    #   fail-fast: false
+    #   matrix:
+    #     # run copies of the current job in parallel
+    #     containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,9 +76,9 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
-          record: true
-          parallel: true
-          group: "UI - Chrome"
+          # record: false
+          # parallel: true
+          # group: "UI - Chrome"
           spec: cypress/tests/ui/*
           config-file: cypress.config.ts
         env:
@@ -90,20 +91,20 @@ jobs:
 
   ui-chrome-mobile-tests:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
       options: --user 1001
     needs: install
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+    # strategy:
+    #   # when one test fails, DO NOT cancel the other
+    #   # containers, because this will kill Cypress processes
+    #   # leaving Cypress Cloud hanging ...
+    #   # https://github.com/cypress-io/github-action/issues/48
+    #   fail-fast: false
+    #   matrix:
+    #     # run copies of the current job in parallel
+    #     containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -122,9 +123,9 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
-          record: true
-          parallel: true
-          group: "UI - Chrome - Mobile"
+          # record: false
+          # parallel: true
+          # group: "UI - Chrome - Mobile"
           spec: cypress/tests/ui/*
           config-file: cypress.config.ts
         env:
@@ -136,20 +137,20 @@ jobs:
 
   ui-firefox-tests:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
       options: --user 1001
     needs: install
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+    # strategy:
+    #   # when one test fails, DO NOT cancel the other
+    #   # containers, because this will kill Cypress processes
+    #   # leaving Cypress Cloud hanging ...
+    #   # https://github.com/cypress-io/github-action/issues/48
+    #   fail-fast: false
+    #   matrix:
+    #     # run copies of the current job in parallel
+    #     containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -167,9 +168,9 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: firefox
-          record: true
-          parallel: true
-          group: "UI - Firefox"
+          # record: false
+          # parallel: true
+          # group: "UI - Firefox"
           spec: cypress/tests/ui/*
           config-file: cypress.config.ts
         env:
@@ -181,20 +182,20 @@ jobs:
 
   ui-firefox-mobile-tests:
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.12.0-chrome-123.0.6312.86-1-ff-124.0.2-edge-123.0.2420.65-1
       options: --user 1001
     needs: install
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
+    # strategy:
+    #   # when one test fails, DO NOT cancel the other
+    #   # containers, because this will kill Cypress processes
+    #   # leaving Cypress Cloud hanging ...
+    #   # https://github.com/cypress-io/github-action/issues/48
+    #   fail-fast: false
+    #   matrix:
+    #     # run copies of the current job in parallel
+    #     containers: [1, 2, 3, 4, 5]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -213,9 +214,9 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: firefox
-          record: true
-          parallel: true
-          group: "UI - Firefox - Mobile"
+          # record: false
+          # parallel: true
+          # group: "UI - Firefox - Mobile"
           spec: cypress/tests/ui/*
           config-file: cypress.config.ts
         env:
