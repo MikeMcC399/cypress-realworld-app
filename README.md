@@ -79,7 +79,7 @@ If you have Node.js' experimental [Corepack](https://nodejs.org/dist/latest/docs
 
 #### Yarn Modern
 
-**This project is not compatible with [Yarn Modern](https://yarnpkg.com/) (version 2 and later).**
+#### Corepack
 
 ### Installation
 
