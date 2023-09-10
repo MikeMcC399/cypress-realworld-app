@@ -1,0 +1,36 @@
+name: Corepack Test
+# Test compatibility with corepack enabled
+# See https://nodejs.org/dist/latest/docs/api/corepack.html
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install-and-test:
+    timeout-minutes: 15
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+      - name: Enable corepack
+        run: corepack enable
+      - name: Yarn Modern global default
+        run: corepack prepare yarn@stable --activate
+      - name: Show yarn version
+        run: yarn -v
+      - name: Cypress build and test
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn build
+          start: yarn start:ci
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          spec: cypress/tests/ui/*
