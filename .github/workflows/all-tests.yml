@@ -1,0 +1,21 @@
+name: All Cypress Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-all:
+    timeout-minutes: 15
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn build:ci
+          start: yarn start:ci
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          config-file: cypress.config.ts
