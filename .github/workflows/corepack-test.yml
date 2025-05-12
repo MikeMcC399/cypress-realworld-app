@@ -12,25 +12,29 @@ on:
 jobs:
   install-and-test:
     timeout-minutes: 15
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18.16.1
-      - name: Enable corepack
-        run: corepack enable
-      - name: Yarn Modern global default
-        run: corepack prepare yarn@stable --activate
+          node-version-file: .node-version
+      - name: Install corepack latest
+        run: npm install -g corepack@latest
+      - name: Enable Corepack
+        # currently globally installing corepack also enables it
+        # the enable command is only for the case that the default is changed
+        run: corepack enable yarn
+      - name: Show corepack version
+        run: corepack --version
       - name: Show yarn version
-        run: yarn -v
+        run: yarn --version
       - name: Cypress build and test
         uses: cypress-io/github-action@v6
         with:
           build: yarn build
           start: yarn start:ci
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:3001"
           wait-on-timeout: 120
           spec: cypress/tests/ui/*
