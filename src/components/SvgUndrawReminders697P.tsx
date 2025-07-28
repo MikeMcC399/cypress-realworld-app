@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgUndrawReminders697P(props: any) {
   return (
@@ -122,7 +122,7 @@ function SvgUndrawReminders697P(props: any) {
         strokeWidth={2}
       />
     </svg>
-  );
+  )
 }
 
-export default SvgUndrawReminders697P;
+export default SvgUndrawReminders697P

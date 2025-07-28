@@ -1,49 +1,49 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { useActor, useMachine } from "@xstate/react";
-import { CssBaseline } from "@mui/material";
+import React from 'react'
+import { styled } from '@mui/material/styles'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import { useActor, useMachine } from '@xstate/react'
+import { CssBaseline } from '@mui/material'
 
-import { snackbarMachine } from "../machines/snackbarMachine";
-import { notificationsMachine } from "../machines/notificationsMachine";
-import { authService } from "../machines/authMachine";
-import AlertBar from "../components/AlertBar";
-import SignInForm from "../components/SignInForm";
-import SignUpForm from "../components/SignUpForm";
-import { bankAccountsMachine } from "../machines/bankAccountsMachine";
-import PrivateRoutesContainer from "./PrivateRoutesContainer";
+import { snackbarMachine } from '../machines/snackbarMachine'
+import { notificationsMachine } from '../machines/notificationsMachine'
+import { authService } from '../machines/authMachine'
+import AlertBar from '../components/AlertBar'
+import SignInForm from '../components/SignInForm'
+import SignUpForm from '../components/SignUpForm'
+import { bankAccountsMachine } from '../machines/bankAccountsMachine'
+import PrivateRoutesContainer from './PrivateRoutesContainer'
 
-const PREFIX = "App";
+const PREFIX = 'App'
 
 const classes = {
   root: `${PREFIX}-root`,
-};
+}
 
-const Root = styled("div")(({ theme }) => ({
+const Root = styled('div')(({ theme }) => ({
   [`&.${classes.root}`]: {
-    display: "flex",
+    display: 'flex',
   },
-}));
+}))
 
 // @ts-ignore
 if (window.Cypress) {
   // Expose authService on window for Cypress
   // @ts-ignore
-  window.authService = authService;
+  window.authService = authService
 }
 
 const App: React.FC = () => {
-  const [authState] = useActor(authService);
-  const [, , notificationsService] = useMachine(notificationsMachine);
+  const [authState] = useActor(authService)
+  const [, , notificationsService] = useMachine(notificationsMachine)
 
-  const [, , snackbarService] = useMachine(snackbarMachine);
+  const [, , snackbarService] = useMachine(snackbarMachine)
 
-  const [, , bankAccountsService] = useMachine(bankAccountsMachine);
+  const [, , bankAccountsService] = useMachine(bankAccountsMachine)
 
   const isLoggedIn =
-    authState.matches("authorized") ||
-    authState.matches("refreshing") ||
-    authState.matches("updating");
+    authState.matches('authorized') ||
+    authState.matches('refreshing') ||
+    authState.matches('updating')
 
   return (
     <Root className={classes.root}>
@@ -58,7 +58,7 @@ const App: React.FC = () => {
           bankAccountsService={bankAccountsService}
         />
       )}
-      {authState.matches("unauthorized") && (
+      {authState.matches('unauthorized') && (
         <Switch>
           <Route exact path="/signup">
             <SignUpForm authService={authService} />
@@ -69,7 +69,7 @@ const App: React.FC = () => {
           <Route path="/*">
             <Redirect
               to={{
-                pathname: "/signin",
+                pathname: '/signin',
               }}
             />
           </Route>
@@ -77,7 +77,7 @@ const App: React.FC = () => {
       )}
       <AlertBar snackbarService={snackbarService} />
     </Root>
-  );
-};
+  )
+}
 
-export default App;
+export default App

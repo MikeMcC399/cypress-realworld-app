@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios'
 
 const httpClient = axios.create({
   withCredentials: true,
-});
+})
 
 httpClient.interceptors.request.use((config) => {
   /* istanbul ignore if */
@@ -12,11 +12,11 @@ httpClient.interceptors.request.use((config) => {
     process.env.VITE_AWS_COGNITO ||
     process.env.VITE_GOOGLE
   ) {
-    const accessToken = localStorage.getItem(process.env.VITE_AUTH_TOKEN_NAME!);
+    const accessToken = localStorage.getItem(process.env.VITE_AUTH_TOKEN_NAME!)
     // @ts-ignore
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    config.headers['Authorization'] = `Bearer ${accessToken}`
   }
-  return config;
-});
+  return config
+})
 
-export { httpClient };
+export { httpClient }

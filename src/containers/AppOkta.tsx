@@ -1,72 +1,72 @@
 /* istanbul ignore next */
-import React, { useEffect } from "react";
-import { styled } from "@mui/material/styles";
-import { useActor, useMachine } from "@xstate/react";
-import { CssBaseline } from "@mui/material";
+import React, { useEffect } from 'react'
+import { styled } from '@mui/material/styles'
+import { useActor, useMachine } from '@xstate/react'
+import { CssBaseline } from '@mui/material'
 // @ts-ignore
-import { LoginCallback, SecureRoute, useOktaAuth, withOktaAuth } from "@okta/okta-react";
-import { Route } from "react-router-dom";
+import { LoginCallback, SecureRoute, useOktaAuth, withOktaAuth } from '@okta/okta-react'
+import { Route } from 'react-router-dom'
 
-import { snackbarMachine } from "../machines/snackbarMachine";
-import { notificationsMachine } from "../machines/notificationsMachine";
-import { authService } from "../machines/authMachine";
-import AlertBar from "../components/AlertBar";
-import { bankAccountsMachine } from "../machines/bankAccountsMachine";
-import PrivateRoutesContainer from "./PrivateRoutesContainer";
+import { snackbarMachine } from '../machines/snackbarMachine'
+import { notificationsMachine } from '../machines/notificationsMachine'
+import { authService } from '../machines/authMachine'
+import AlertBar from '../components/AlertBar'
+import { bankAccountsMachine } from '../machines/bankAccountsMachine'
+import PrivateRoutesContainer from './PrivateRoutesContainer'
 
-const PREFIX = "appOkta";
+const PREFIX = 'appOkta'
 
 const classes = {
   root: `${PREFIX}-root`,
-};
+}
 
-const Root = styled("div")(({ theme }) => ({
+const Root = styled('div')(({ theme }) => ({
   [`&.${classes.root}`]: {
-    display: "flex",
+    display: 'flex',
   },
-}));
+}))
 
 // @ts-ignore
 if (window.Cypress) {
   // Expose authService on window for Cypress
   // @ts-ignore
-  window.authService = authService;
+  window.authService = authService
 }
 
 /* istanbul ignore next */
 const AppOkta: React.FC = () => {
-  const { authState: oktaAuthState, oktaAuth: oktaAuthService } = useOktaAuth();
+  const { authState: oktaAuthState, oktaAuth: oktaAuthService } = useOktaAuth()
 
-  const [authState] = useActor(authService);
-  const [, , notificationsService] = useMachine(notificationsMachine);
+  const [authState] = useActor(authService)
+  const [, , notificationsService] = useMachine(notificationsMachine)
 
-  const [, , snackbarService] = useMachine(snackbarMachine);
+  const [, , snackbarService] = useMachine(snackbarMachine)
 
-  const [, , bankAccountsService] = useMachine(bankAccountsMachine);
+  const [, , bankAccountsService] = useMachine(bankAccountsMachine)
 
   // @ts-ignore
   if (window.Cypress && process.env.VITE_OKTA_PROGRAMMATIC) {
     useEffect(() => {
-      const okta = JSON.parse(localStorage.getItem("oktaCypress")!);
-      authService.send("OKTA", {
+      const okta = JSON.parse(localStorage.getItem('oktaCypress')!)
+      authService.send('OKTA', {
         user: okta.user,
         token: okta.token,
-      });
-    }, []);
+      })
+    }, [])
   } else {
     useEffect(() => {
       if (oktaAuthState.isAuthenticated) {
         oktaAuthService.getUser().then((user: any) => {
-          authService.send("OKTA", { user, token: oktaAuthState.accessToken });
-        });
+          authService.send('OKTA', { user, token: oktaAuthState.accessToken })
+        })
       }
-    }, [oktaAuthState, oktaAuthService]);
+    }, [oktaAuthState, oktaAuthService])
   }
 
   const isLoggedIn =
-    authState.matches("authorized") ||
-    authState.matches("refreshing") ||
-    authState.matches("updating");
+    authState.matches('authorized') ||
+    authState.matches('refreshing') ||
+    authState.matches('updating')
 
   return (
     <Root className={classes.root}>
@@ -81,7 +81,7 @@ const AppOkta: React.FC = () => {
           bankAccountsService={bankAccountsService}
         />
       )}
-      {authState.matches("unauthorized") && (
+      {authState.matches('unauthorized') && (
         <>
           <Route path="/implicit/callback" component={LoginCallback} />
           <SecureRoute exact path="/" />
@@ -90,10 +90,10 @@ const AppOkta: React.FC = () => {
 
       <AlertBar snackbarService={snackbarService} />
     </Root>
-  );
-};
+  )
+}
 
 let appOkta =
   //@ts-ignore
-  window.Cypress && process.env.VITE_OKTA_PROGRAMMATIC ? AppOkta : withOktaAuth(AppOkta);
-export default appOkta;
+  window.Cypress && process.env.VITE_OKTA_PROGRAMMATIC ? AppOkta : withOktaAuth(AppOkta)
+export default appOkta

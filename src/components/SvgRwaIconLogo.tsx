@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgRwaIconLogo(props: any) {
   return (
@@ -15,7 +15,7 @@ function SvgRwaIconLogo(props: any) {
         fillRule="evenodd"
       />
     </svg>
-  );
+  )
 }
 
-export default SvgRwaIconLogo;
+export default SvgRwaIconLogo

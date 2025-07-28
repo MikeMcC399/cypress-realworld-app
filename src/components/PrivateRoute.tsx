@@ -1,8 +1,8 @@
-import React from "react";
-import { Route, Redirect, RouteProps } from "react-router-dom";
+import React from 'react'
+import { Route, Redirect, RouteProps } from 'react-router-dom'
 
 interface IPrivateRouteProps extends RouteProps {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean
 }
 
 function PrivateRoute({ isLoggedIn, children, ...rest }: IPrivateRouteProps) {
@@ -16,14 +16,14 @@ function PrivateRoute({ isLoggedIn, children, ...rest }: IPrivateRouteProps) {
           /* istanbul ignore next */
           <Redirect
             to={{
-              pathname: "/signin",
+              pathname: '/signin',
               state: { from: location },
             }}
           />
         )
       }
     />
-  );
+  )
 }
 
-export default PrivateRoute;
+export default PrivateRoute

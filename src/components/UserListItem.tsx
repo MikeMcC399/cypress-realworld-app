@@ -1,12 +1,12 @@
-import React from "react";
-import { ListItem, ListItemText, ListItemAvatar, Avatar, Grid } from "@mui/material";
+import React from 'react'
+import { ListItem, ListItemText, ListItemAvatar, Avatar, Grid } from '@mui/material'
 
-import { User } from "../models";
+import { User } from '../models'
 
 export interface UserListItemProps {
-  user: User;
-  setReceiver: Function;
-  index: Number;
+  user: User
+  setReceiver: Function
+  index: Number
 }
 
 const UserListItem: React.FC<UserListItemProps> = ({ user, setReceiver, index }) => {
@@ -20,28 +20,28 @@ const UserListItem: React.FC<UserListItemProps> = ({ user, setReceiver, index })
         secondary={
           <span>
             <Grid
-              component={"span"}
+              component={'span'}
               container
               direction="row"
               justifyContent="flex-start"
               alignItems="flex-start"
               spacing={1}
             >
-              <Grid item component={"span"}>
+              <Grid item component={'span'}>
                 <b>U: </b>
                 {user.username}
               </Grid>
-              <Grid item component={"span"}>
+              <Grid item component={'span'}>
                 &bull;
               </Grid>
-              <Grid item component={"span"}>
+              <Grid item component={'span'}>
                 <b>E: </b>
                 {user.email}
               </Grid>
-              <Grid item component={"span"}>
+              <Grid item component={'span'}>
                 &bull;
               </Grid>
-              <Grid item component={"span"}>
+              <Grid item component={'span'}>
                 <b>P: </b>
                 {user.phoneNumber}
               </Grid>
@@ -50,7 +50,7 @@ const UserListItem: React.FC<UserListItemProps> = ({ user, setReceiver, index })
         }
       />
     </ListItem>
-  );
-};
+  )
+}
 
-export default UserListItem;
+export default UserListItem

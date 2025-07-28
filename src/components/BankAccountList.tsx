@@ -1,13 +1,13 @@
-import React from "react";
-import { List } from "@mui/material";
+import React from 'react'
+import { List } from '@mui/material'
 
-import { BankAccount } from "../models";
-import BankAccountItem from "./BankAccountItem";
-import EmptyList from "./EmptyList";
+import { BankAccount } from '../models'
+import BankAccountItem from './BankAccountItem'
+import EmptyList from './EmptyList'
 
 export interface BankAccountListProps {
-  bankAccounts: BankAccount[];
-  deleteBankAccount: Function;
+  bankAccounts: BankAccount[]
+  deleteBankAccount: Function
 }
 
 const BankAccountList: React.FC<BankAccountListProps> = ({ bankAccounts, deleteBankAccount }) => {
@@ -27,7 +27,7 @@ const BankAccountList: React.FC<BankAccountListProps> = ({ bankAccounts, deleteB
         <EmptyList entity="Bank Accounts" />
       )}
     </>
-  );
-};
+  )
+}
 
-export default BankAccountList;
+export default BankAccountList

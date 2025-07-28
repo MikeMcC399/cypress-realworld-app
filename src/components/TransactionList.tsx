@@ -1,35 +1,35 @@
-import React, { ReactNode } from "react";
-import { styled } from "@mui/material/styles";
-import { Paper, Button, ListSubheader, Grid } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import { isEmpty } from "lodash/fp";
+import React, { ReactNode } from 'react'
+import { styled } from '@mui/material/styles'
+import { Paper, Button, ListSubheader, Grid } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import { isEmpty } from 'lodash/fp'
 
-import SkeletonList from "./SkeletonList";
-import { TransactionResponseItem, TransactionPagination } from "../models";
-import EmptyList from "./EmptyList";
-import TransactionInfiniteList from "./TransactionInfiniteList";
-import TransferMoneyIllustration from "./SvgUndrawTransferMoneyRywa";
+import SkeletonList from './SkeletonList'
+import { TransactionResponseItem, TransactionPagination } from '../models'
+import EmptyList from './EmptyList'
+import TransactionInfiniteList from './TransactionInfiniteList'
+import TransferMoneyIllustration from './SvgUndrawTransferMoneyRywa'
 
-const PREFIX = "TransactionList";
+const PREFIX = 'TransactionList'
 
 const classes = {
   paper: `${PREFIX}-paper`,
-};
+}
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   [`&.${classes.paper}`]: {
     paddingLeft: theme.spacing(1),
   },
-}));
+}))
 
 export interface TransactionListProps {
-  header: string;
-  transactions: TransactionResponseItem[];
-  isLoading: Boolean;
-  showCreateButton?: Boolean;
-  loadNextPage: Function;
-  pagination: TransactionPagination;
-  filterComponent: ReactNode;
+  header: string
+  transactions: TransactionResponseItem[]
+  isLoading: Boolean
+  showCreateButton?: Boolean
+  loadNextPage: Function
+  pagination: TransactionPagination
+  filterComponent: ReactNode
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({
@@ -41,8 +41,8 @@ const TransactionList: React.FC<TransactionListProps> = ({
   pagination,
   filterComponent,
 }) => {
-  const showEmptyList = !isLoading && transactions?.length === 0;
-  const showSkeleton = isLoading && isEmpty(pagination);
+  const showEmptyList = !isLoading && transactions?.length === 0
+  const showSkeleton = isLoading && isEmpty(pagination)
 
   return (
     <StyledPaper className={classes.paper}>
@@ -63,7 +63,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
             direction="column"
             justifyContent="center"
             alignItems="center"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             spacing={2}
           >
             <Grid item>
@@ -86,7 +86,7 @@ const TransactionList: React.FC<TransactionListProps> = ({
         </EmptyList>
       )}
     </StyledPaper>
-  );
-};
+  )
+}
 
-export default TransactionList;
+export default TransactionList

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgUndrawPersonalFinanceTqcd(props: any) {
   return (
@@ -78,7 +78,7 @@ function SvgUndrawPersonalFinanceTqcd(props: any) {
       <circle cx={623} cy={68.803} r={9} fill="#3f51b5" />
       <circle cx={676} cy={34.803} r={9} fill="#3f51b5" />
     </svg>
-  );
+  )
 }
 
-export default SvgUndrawPersonalFinanceTqcd;
+export default SvgUndrawPersonalFinanceTqcd

@@ -1,50 +1,50 @@
-import React, { useState } from "react";
-import { styled } from "@mui/material/styles";
-import NumberFormat from "react-number-format";
-import { Formik, Form, Field, FieldProps } from "formik";
-import { string, object, number } from "yup";
-import { Paper, Typography, Button, Grid, Container, Avatar, Box, TextField } from "@mui/material";
-import { User } from "../models";
+import React, { useState } from 'react'
+import { styled } from '@mui/material/styles'
+import NumberFormat from 'react-number-format'
+import { Formik, Form, Field, FieldProps } from 'formik'
+import { string, object, number } from 'yup'
+import { Paper, Typography, Button, Grid, Container, Avatar, Box, TextField } from '@mui/material'
+import { User } from '../models'
 
-const PREFIX = "TransactionCreateStepTwo";
+const PREFIX = 'TransactionCreateStepTwo'
 
 const classes = {
   paper: `${PREFIX}-paper`,
   form: `${PREFIX}-form`,
   submit: `${PREFIX}-submit`,
-};
+}
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   [`&.${classes.paper}`]: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   [`& .${classes.form}`]: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing(1),
   },
 
   [`& .${classes.submit}`]: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+}))
 
 const validationSchema = object({
-  amount: number().required("Please enter a valid amount"),
-  description: string().required("Please enter a note"),
+  amount: number().required('Please enter a valid amount'),
+  description: string().required('Please enter a note'),
   senderId: string(),
   receiverId: string(),
-});
+})
 
 interface NumberFormatCustomProps {
-  inputRef: (el: HTMLInputElement) => void;
-  onChange: (event: { target: { value: string } }) => void;
+  inputRef: (el: HTMLInputElement) => void
+  onChange: (event: { target: { value: string } }) => void
 }
 
 function NumberFormatCustom(props: NumberFormatCustomProps) {
-  const { inputRef, onChange, ...other } = props;
+  const { inputRef, onChange, ...other } = props
 
   return (
     <NumberFormat
@@ -56,27 +56,27 @@ function NumberFormatCustom(props: NumberFormatCustomProps) {
             ...other,
             value: values.value,
           },
-        });
+        })
       }}
       thousandSeparator
       isNumericString
       prefix="$"
     />
-  );
+  )
 }
 
 export interface TransactionCreateStepTwoProps {
-  receiver: User;
-  sender: User;
-  createTransaction: Function;
-  showSnackbar: Function;
+  receiver: User
+  sender: User
+  createTransaction: Function
+  showSnackbar: Function
 }
 
 interface FormValues {
-  amount: number | "";
-  description: string;
-  senderId: string;
-  receiverId: string;
+  amount: number | ''
+  description: string
+  senderId: string
+  receiverId: string
 }
 
 const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
@@ -85,13 +85,13 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
   createTransaction,
   showSnackbar,
 }) => {
-  const [transactionType, setTransactionType] = useState<string>();
+  const [transactionType, setTransactionType] = useState<string>()
   const initialValues: FormValues = {
-    amount: "",
-    description: "",
+    amount: '',
+    description: '',
     senderId: sender.id,
     receiverId: receiver.id,
-  };
+  }
 
   return (
     <StyledPaper className={classes.paper} elevation={0}>
@@ -114,16 +114,16 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
           validationSchema={validationSchema}
           validateOnMount={true}
           onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(true);
+            setSubmitting(true)
 
             // reset transactionType
-            setTransactionType(undefined);
+            setTransactionType(undefined)
 
-            createTransaction({ transactionType, ...values });
+            createTransaction({ transactionType, ...values })
             showSnackbar({
-              severity: "success",
-              message: "Transaction Submitted!",
-            });
+              severity: 'success',
+              message: 'Transaction Submitted!',
+            })
           }}
         >
           {({ isValid, isSubmitting }) => (
@@ -136,15 +136,15 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
                     fullWidth
                     required
                     autoFocus
-                    id={"transaction-create-amount-input"}
+                    id={'transaction-create-amount-input'}
                     type="text"
                     placeholder="Amount"
-                    data-test={"transaction-create-amount-input"}
+                    data-test={'transaction-create-amount-input'}
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     InputProps={{
                       inputComponent: NumberFormatCustom as any,
-                      inputProps: { id: "amount" },
+                      inputProps: { id: 'amount' },
                     }}
                     {...field}
                   />
@@ -157,12 +157,12 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
                     margin="dense"
                     fullWidth
                     required
-                    id={"transaction-create-description-input"}
+                    id={'transaction-create-description-input'}
                     type="text"
                     placeholder="Add a note"
-                    data-test={"transaction-create-description-input"}
+                    data-test={'transaction-create-description-input'}
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -183,7 +183,7 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
                     className={classes.submit}
                     data-test="transaction-create-submit-request"
                     disabled={!isValid || isSubmitting}
-                    onClick={() => setTransactionType("request")}
+                    onClick={() => setTransactionType('request')}
                   >
                     Request
                   </Button>
@@ -197,7 +197,7 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
                     className={classes.submit}
                     data-test="transaction-create-submit-payment"
                     disabled={!isValid || isSubmitting}
-                    onClick={() => setTransactionType("payment")}
+                    onClick={() => setTransactionType('payment')}
                   >
                     Pay
                   </Button>
@@ -208,7 +208,7 @@ const TransactionCreateStepTwo: React.FC<TransactionCreateStepTwoProps> = ({
         </Formik>
       </Container>
     </StyledPaper>
-  );
-};
+  )
+}
 
-export default TransactionCreateStepTwo;
+export default TransactionCreateStepTwo

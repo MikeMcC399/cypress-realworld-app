@@ -1,32 +1,32 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import { useActor } from "@xstate/react";
-import { Interpreter } from "xstate";
-import { Link } from "react-router-dom";
-import { Button, Container, CssBaseline, TextField, Grid, Box, Typography } from "@mui/material";
-import { Formik, Form, Field, FieldProps } from "formik";
-import { string, object, ref } from "yup";
+import React from 'react'
+import { styled } from '@mui/material/styles'
+import { useActor } from '@xstate/react'
+import { Interpreter } from 'xstate'
+import { Link } from 'react-router-dom'
+import { Button, Container, CssBaseline, TextField, Grid, Box, Typography } from '@mui/material'
+import { Formik, Form, Field, FieldProps } from 'formik'
+import { string, object, ref } from 'yup'
 
-import RWALogo from "./SvgRwaLogo";
-import Footer from "./Footer";
-import { SignUpPayload } from "../models";
-import { AuthMachineContext, AuthMachineEvents, AuthMachineSchema } from "../machines/authMachine";
+import RWALogo from './SvgRwaLogo'
+import Footer from './Footer'
+import { SignUpPayload } from '../models'
+import { AuthMachineContext, AuthMachineEvents, AuthMachineSchema } from '../machines/authMachine'
 
-const PREFIX = "SignUpForm";
+const PREFIX = 'SignUpForm'
 
 const classes = {
   paper: `${PREFIX}-paper`,
   logo: `${PREFIX}-logo`,
   form: `${PREFIX}-form`,
   submit: `${PREFIX}-submit`,
-};
+}
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   [`& .${classes.paper}`]: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   [`& .${classes.logo}`]: {
@@ -34,42 +34,42 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   },
 
   [`& .${classes.form}`]: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
 
   [`& .${classes.submit}`]: {
     margin: theme.spacing(3, 0, 2),
   },
-})) as typeof Container;
+})) as typeof Container
 
 const validationSchema = object({
-  firstName: string().required("First Name is required"),
-  lastName: string().required("Last Name is required"),
-  username: string().required("Username is required"),
+  firstName: string().required('First Name is required'),
+  lastName: string().required('Last Name is required'),
+  username: string().required('Username is required'),
   password: string()
-    .min(4, "Password must contain at least 4 characters")
-    .required("Enter your password"),
+    .min(4, 'Password must contain at least 4 characters')
+    .required('Enter your password'),
   confirmPassword: string()
-    .required("Confirm your password")
-    .oneOf([ref("password")], "Password does not match"),
-});
+    .required('Confirm your password')
+    .oneOf([ref('password')], 'Password does not match'),
+})
 
 export interface Props {
-  authService: Interpreter<AuthMachineContext, AuthMachineSchema, AuthMachineEvents, any, any>;
+  authService: Interpreter<AuthMachineContext, AuthMachineSchema, AuthMachineEvents, any, any>
 }
 
 const SignUpForm: React.FC<Props> = ({ authService }) => {
-  const [, sendAuth] = useActor(authService);
+  const [, sendAuth] = useActor(authService)
   const initialValues: SignUpPayload & { confirmPassword: string } = {
-    firstName: "",
-    lastName: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  };
+    firstName: '',
+    lastName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+  }
 
-  const signUpPending = (payload: SignUpPayload) => sendAuth({ type: "SIGNUP", ...payload });
+  const signUpPending = (payload: SignUpPayload) => sendAuth({ type: 'SIGNUP', ...payload })
 
   return (
     <StyledContainer component="main" maxWidth="xs">
@@ -85,9 +85,9 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={async (values, { setSubmitting, setFieldValue }) => {
-            setSubmitting(true);
+            setSubmitting(true)
 
-            signUpPending(values);
+            signUpPending(values)
           }}
         >
           {({ isValid, isSubmitting, dirty }) => (
@@ -105,7 +105,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
                     autoFocus
                     data-test="signup-first-name"
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -122,7 +122,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
                     type="text"
                     data-test="signup-last-name"
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -139,7 +139,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
                     type="text"
                     data-test="signup-username"
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -156,7 +156,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
                     id="password"
                     data-test="signup-password"
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -173,7 +173,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
                     data-test="signup-confirmPassword"
                     type="password"
                     error={(touched || value !== initialValue) && Boolean(error)}
-                    helperText={touched || value !== initialValue ? error : ""}
+                    helperText={touched || value !== initialValue ? error : ''}
                     {...field}
                   />
                 )}
@@ -191,7 +191,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link to="/signin">{"Have an account? Sign In"}</Link>
+                  <Link to="/signin">{'Have an account? Sign In'}</Link>
                 </Grid>
               </Grid>
             </Form>
@@ -202,7 +202,7 @@ const SignUpForm: React.FC<Props> = ({ authService }) => {
         <Footer />
       </Box>
     </StyledContainer>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

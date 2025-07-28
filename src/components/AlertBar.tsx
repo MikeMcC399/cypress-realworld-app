@@ -1,15 +1,15 @@
-import React from "react";
-import { Snackbar } from "@mui/material";
+import React from 'react'
+import { Snackbar } from '@mui/material'
 import {
   BaseActionObject,
   Interpreter,
   ResolveTypegenMeta,
   ServiceMap,
   TypegenDisabled,
-} from "xstate";
-import { SnackbarContext, SnackbarSchema, SnackbarEvents } from "../machines/snackbarMachine";
-import { useActor } from "@xstate/react";
-import { Alert } from "@mui/material";
+} from 'xstate'
+import { SnackbarContext, SnackbarSchema, SnackbarEvents } from '../machines/snackbarMachine'
+import { useActor } from '@xstate/react'
+import { Alert } from '@mui/material'
 
 interface Props {
   snackbarService: Interpreter<
@@ -18,16 +18,16 @@ interface Props {
     SnackbarEvents,
     any,
     ResolveTypegenMeta<TypegenDisabled, SnackbarEvents, BaseActionObject, ServiceMap>
-  >;
+  >
 }
 
 const AlertBar: React.FC<Props> = ({ snackbarService }) => {
-  const [snackbarState] = useActor(snackbarService);
+  const [snackbarState] = useActor(snackbarService)
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      open={snackbarState?.matches("visible")}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      open={snackbarState?.matches('visible')}
       autoHideDuration={3000}
     >
       <Alert
@@ -39,7 +39,7 @@ const AlertBar: React.FC<Props> = ({ snackbarService }) => {
         {snackbarState?.context.message}
       </Alert>
     </Snackbar>
-  );
-};
+  )
+}
 
-export default AlertBar;
+export default AlertBar

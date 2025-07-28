@@ -1,10 +1,10 @@
-import React from "react";
-import { ListItem, ListItemText } from "@mui/material";
+import React from 'react'
+import { ListItem, ListItemText } from '@mui/material'
 
-import { Comment } from "../models";
+import { Comment } from '../models'
 
 export interface CommentListItemProps {
-  comment: Comment;
+  comment: Comment
 }
 
 const CommentListItem: React.FC<CommentListItemProps> = ({ comment }) => {
@@ -12,7 +12,7 @@ const CommentListItem: React.FC<CommentListItemProps> = ({ comment }) => {
     <ListItem data-test={`comment-list-item-${comment.id}`}>
       <ListItemText primary={`${comment.content}`} />
     </ListItem>
-  );
-};
+  )
+}
 
-export default CommentListItem;
+export default CommentListItem

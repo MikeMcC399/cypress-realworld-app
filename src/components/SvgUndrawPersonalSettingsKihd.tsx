@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgUndrawPersonalSettingsKihd(props: any) {
   return (
@@ -229,7 +229,7 @@ function SvgUndrawPersonalSettingsKihd(props: any) {
         opacity={0.1}
       />
     </svg>
-  );
+  )
 }
 
-export default SvgUndrawPersonalSettingsKihd;
+export default SvgUndrawPersonalSettingsKihd

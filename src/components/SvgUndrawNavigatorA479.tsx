@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgUndrawNavigatorA479(props: any) {
   return (
@@ -108,7 +108,7 @@ function SvgUndrawNavigatorA479(props: any) {
         fill="#3f51b5"
       />
     </svg>
-  );
+  )
 }
 
-export default SvgUndrawNavigatorA479;
+export default SvgUndrawNavigatorA479

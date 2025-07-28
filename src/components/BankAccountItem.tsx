@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import { Grid, Typography, Button, ListItem } from "@mui/material";
-import { BankAccount } from "../models";
+import { Grid, Typography, Button, ListItem } from '@mui/material'
+import { BankAccount } from '../models'
 
 export interface BankAccountListItemProps {
-  bankAccount: BankAccount;
-  deleteBankAccount: Function;
+  bankAccount: BankAccount
+  deleteBankAccount: Function
 }
 
 const BankAccountListItem: React.FC<BankAccountListItemProps> = ({
@@ -17,7 +17,7 @@ const BankAccountListItem: React.FC<BankAccountListItemProps> = ({
       <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
         <Grid item>
           <Typography variant="body1" color="primary" gutterBottom>
-            {bankAccount.bankName} {bankAccount.isDeleted ? "(Deleted)" : undefined}
+            {bankAccount.bankName} {bankAccount.isDeleted ? '(Deleted)' : undefined}
           </Typography>
         </Grid>
         {!bankAccount.isDeleted && (
@@ -28,7 +28,7 @@ const BankAccountListItem: React.FC<BankAccountListItemProps> = ({
               size="large"
               data-test="bankaccount-delete"
               onClick={() => {
-                deleteBankAccount({ id: bankAccount.id });
+                deleteBankAccount({ id: bankAccount.id })
               }}
             >
               Delete
@@ -37,7 +37,7 @@ const BankAccountListItem: React.FC<BankAccountListItemProps> = ({
         )}
       </Grid>
     </ListItem>
-  );
-};
+  )
+}
 
-export default BankAccountListItem;
+export default BankAccountListItem

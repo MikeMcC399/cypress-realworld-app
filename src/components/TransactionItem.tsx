@@ -1,6 +1,6 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
-import { useHistory } from "react-router";
+import React from 'react'
+import { styled } from '@mui/material/styles'
+import { useHistory } from 'react-router'
 import {
   ListItem,
   Typography,
@@ -10,13 +10,13 @@ import {
   Paper,
   Badge,
   Theme,
-} from "@mui/material";
-import { ThumbUpAltOutlined as LikeIcon, CommentRounded as CommentIcon } from "@mui/icons-material";
-import { TransactionResponseItem } from "../models";
-import TransactionTitle from "./TransactionTitle";
-import TransactionAmount from "./TransactionAmount";
+} from '@mui/material'
+import { ThumbUpAltOutlined as LikeIcon, CommentRounded as CommentIcon } from '@mui/icons-material'
+import { TransactionResponseItem } from '../models'
+import TransactionTitle from './TransactionTitle'
+import TransactionAmount from './TransactionAmount'
 
-const PREFIX = "TransactionItem";
+const PREFIX = 'TransactionItem'
 
 const classes = {
   root: `${PREFIX}-root`,
@@ -25,7 +25,7 @@ const classes = {
   socialStats: `${PREFIX}-socialStats`,
   countIcons: `${PREFIX}-countIcons`,
   countText: `${PREFIX}-countText`,
-};
+}
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   [`& .${classes.root}`]: {
@@ -34,8 +34,8 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
 
   [`& .${classes.paper}`]: {
     padding: theme.spacing(0),
-    margin: "auto",
-    width: "100%",
+    margin: 'auto',
+    width: '100%',
   },
 
   [`& .${classes.avatar}`]: {
@@ -43,7 +43,7 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
   },
 
   [`& .${classes.socialStats}`]: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('md')]: {
       marginTop: theme.spacing(2),
     },
   },
@@ -58,26 +58,26 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
     height: theme.spacing(2),
     width: theme.spacing(2),
   },
-}));
+}))
 
 type TransactionProps = {
-  transaction: TransactionResponseItem;
-};
+  transaction: TransactionResponseItem
+}
 
 const SmallAvatar = styled(Avatar)(({ theme }: { theme: Theme }) => {
   return {
     width: 22,
     height: 22,
     border: `2px solid ${theme.palette.background.paper}`,
-  };
-});
+  }
+})
 
 const TransactionItem: React.FC<TransactionProps> = ({ transaction }) => {
-  const history = useHistory();
+  const history = useHistory()
 
   const showTransactionDetail = (transactionId: string) => {
-    history.push(`/transaction/${transactionId}`);
-  };
+    history.push(`/transaction/${transactionId}`)
+  }
 
   return (
     <StyledListItem
@@ -92,8 +92,8 @@ const TransactionItem: React.FC<TransactionProps> = ({ transaction }) => {
               <Badge
                 overlap="circular"
                 anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
+                  vertical: 'bottom',
+                  horizontal: 'right',
                 }}
                 badgeContent={
                   <SmallAvatar
@@ -149,7 +149,7 @@ const TransactionItem: React.FC<TransactionProps> = ({ transaction }) => {
         </Grid>
       </Paper>
     </StyledListItem>
-  );
-};
+  )
+}
 
-export default TransactionItem;
+export default TransactionItem

@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 
 function SvgUndrawTransferMoneyRywa(props: any) {
   return (
@@ -275,7 +275,7 @@ function SvgUndrawTransferMoneyRywa(props: any) {
         d="M290.708 224.459l1.909.604-2.984 9.399 9.594 2.289-.467 1.947-11.683-2.791 3.631-11.448z"
       />
     </svg>
-  );
+  )
 }
 
-export default SvgUndrawTransferMoneyRywa;
+export default SvgUndrawTransferMoneyRywa

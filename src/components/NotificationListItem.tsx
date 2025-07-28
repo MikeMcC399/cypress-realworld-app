@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles'
 
 import {
   Check as CheckIcon,
@@ -8,7 +8,7 @@ import {
   Payment as PaymentIcon,
   CommentRounded as CommentIcon,
   MonetizationOn as MonetizationOnIcon,
-} from "@mui/icons-material";
+} from '@mui/icons-material'
 import {
   Button,
   ListItemIcon,
@@ -17,22 +17,22 @@ import {
   useMediaQuery,
   ListItem,
   IconButton,
-} from "@mui/material";
+} from '@mui/material'
 import {
   isCommentNotification,
   isLikeNotification,
   isPaymentNotification,
   isPaymentRequestedNotification,
   isPaymentReceivedNotification,
-} from "../utils/transactionUtils";
-import { NotificationResponseItem } from "../models";
+} from '../utils/transactionUtils'
+import { NotificationResponseItem } from '../models'
 
 export interface NotificationListItemProps {
-  notification: NotificationResponseItem;
-  updateNotification: Function;
+  notification: NotificationResponseItem
+  updateNotification: Function
 }
 
-const PREFIX = "NotificationListItem";
+const PREFIX = 'NotificationListItem'
 
 const classes = {
   card: `${PREFIX}-card`,
@@ -40,52 +40,52 @@ const classes = {
   green: `${PREFIX}-green`,
   red: `${PREFIX}-red`,
   blue: `${PREFIX}-blue`,
-};
+}
 
 const StyledListItem = styled(ListItem)({
   [`& .${classes.card}`]: {
-    minWidth: "100%",
+    minWidth: '100%',
   },
   [`& .${classes.title}`]: {
     fontSize: 18,
   },
   [`& .${classes.green}`]: {
-    color: "#4CAF50",
+    color: '#4CAF50',
   },
   [`& .${classes.red}`]: {
-    color: "red",
+    color: 'red',
   },
   [`& .${classes.blue}`]: {
-    color: "blue",
+    color: 'blue',
   },
-});
+})
 
 const NotificationListItem: React.FC<NotificationListItemProps> = ({
   notification,
   updateNotification,
 }) => {
-  const theme = useTheme();
-  let listItemText = undefined;
-  let listItemIcon = undefined;
-  const xsBreakpoint = useMediaQuery(theme.breakpoints.only("xs"));
+  const theme = useTheme()
+  let listItemText = undefined
+  let listItemIcon = undefined
+  const xsBreakpoint = useMediaQuery(theme.breakpoints.only('xs'))
 
   if (isCommentNotification(notification)) {
-    listItemIcon = <CommentIcon />;
-    listItemText = `${notification.userFullName} commented on a transaction.`;
+    listItemIcon = <CommentIcon />
+    listItemText = `${notification.userFullName} commented on a transaction.`
   }
 
   if (isLikeNotification(notification)) {
-    listItemIcon = <LikeIcon />;
-    listItemText = `${notification.userFullName} liked a transaction.`;
+    listItemIcon = <LikeIcon />
+    listItemText = `${notification.userFullName} liked a transaction.`
   }
 
   if (isPaymentNotification(notification)) {
     if (isPaymentRequestedNotification(notification)) {
-      listItemIcon = <PaymentIcon className={classes.red} />;
-      listItemText = `${notification.userFullName} requested payment.`;
+      listItemIcon = <PaymentIcon className={classes.red} />
+      listItemText = `${notification.userFullName} requested payment.`
     } else if (isPaymentReceivedNotification(notification)) {
-      listItemIcon = <MonetizationOnIcon className={classes.green} />;
-      listItemText = `${notification.userFullName} received payment.`;
+      listItemIcon = <MonetizationOnIcon className={classes.green} />
+      listItemText = `${notification.userFullName} received payment.`
     }
   }
 
@@ -115,7 +115,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({
         </Button>
       )}
     </StyledListItem>
-  );
-};
+  )
+}
 
-export default NotificationListItem;
+export default NotificationListItem
