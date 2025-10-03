@@ -10,7 +10,7 @@ jobs:
   install:
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:22.16.0
+      image: cypress/browsers:22.20.0
       options: --user 1001
     steps:
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:22.16.0
+      image: cypress/browsers:22.20.0
       options: --user 1001
     needs: install
     # strategy:
@@ -93,7 +93,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:22.16.0
+      image: cypress/browsers:22.20.0
       options: --user 1001
     needs: install
     # strategy:
@@ -139,7 +139,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:22.16.0
+      image: cypress/browsers:22.20.0
       options: --user 1001
     needs: install
     # strategy:
@@ -184,7 +184,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     container:
-      image: cypress/browsers:22.16.0
+      image: cypress/browsers:22.20.0
       options: --user 1001
     needs: install
     # strategy:
